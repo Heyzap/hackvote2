@@ -1,0 +1,16 @@
+<% provide(:title, 'New') %>
+<h1>Submit A New Hack</h1>
+<div class = "row" >
+  <div class="span6 offset3">
+    <%= form_for [@day, @hack] do |f| %>
+
+      <%= f.label :creator, "Creator(s)" %>
+      <%= f.text_field :creator %>
+                  
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+      <%= f.submit "Submit my Hackday", class: "btn btn-large btn-primary" %>
+    
+    <% end %>
+  </div>
+</div>

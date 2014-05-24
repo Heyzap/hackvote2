@@ -1,0 +1,9 @@
+<div class="radio">
+  <label>
+    <input type="radio" name="hackdayRadio" value="<%=hack.title%>" />
+    <%= "#{hack.title}, by #{hack.creator}:" %>
+    <div class= "pull-right">
+      <b><%="#{hack.votes.to_s}"%></b> votes
+    </div> 
+  </label>
+</div>

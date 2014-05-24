@@ -1,0 +1,11 @@
+<% provide(:title, @day.title) %>
+<h1><%= @day.title %></h1>
+<%= form_tag("/days/#{@day.id}/update", :method => "post") do %>
+  <%= render @day.hacks %>
+  <%if @day.hacks.all.empty?%>
+    <h2>Get Hacking!</h2>
+  <%else %>
+    <%= submit_tag "Vote", class: "btn btn-success"  %>
+  <%end%>
+  <%= link_to "New Hack", new_day_hack_path(@day),  class: "btn btn-primary" %>
+<%end%>

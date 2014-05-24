@@ -1,0 +1,7 @@
+<% provide(:title, 'Home') %>
+<div class="center hero-unit">
+  <h1>Welcome to the Hackday Voting App</h1>
+  <%= link_to "New Hackday", new_day_path, class: "btn btn-large btn-primary" %>
+</div>
+  <h1>Previous Hackdays</h1>
+  <%= render @days%>
