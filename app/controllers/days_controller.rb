@@ -6,6 +6,7 @@ class DaysController < ApplicationController
 
   def show
     @day = Day.find_by_id(params[:id])
+    @votes_left = votes_left(@day)
   end
 
   def index
@@ -38,14 +39,13 @@ class DaysController < ApplicationController
     end
   end
 
-  def votes_left(day)
-    unless cookies.permanent[day.title.to_sym]
-      cookies.permanent[day.title.to_sym] = "3"
-    end
-    return cookies.permanent[day.title.to_sym].to_i
-  end 
-
 private 
+    def votes_left(day)
+      unless cookies.permanent[day.title.to_sym]
+        cookies.permanent[day.title.to_sym] = "3"
+      end
+      return cookies.permanent[day.title.to_sym].to_i
+    end 
 
     def dec_votes(day) 
       votes = cookies.permanent[day.title.to_sym].to_i
