@@ -8,5 +8,7 @@ class CreateHacks < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :hacks, :day_id, unique: false 
   end
 end

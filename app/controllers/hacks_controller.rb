@@ -5,13 +5,8 @@ class HacksController < ApplicationController
   end
 
   def create
-    @day = Day.find params[:day_id]
+    @day = Day.find_by_id(params[:day_id])
     @hack = Hack.create(hack_params)
-    puts "here da hack"
-    puts @hack.title
-    puts @hack.creator
-    puts @hack.id
-    puts @hack.day.id
     if @hack.save
       flash[:success] = "#{@hack.creator} made #{@hack.title}?!?! What a Hax0r!"
       redirect_to @day
@@ -20,9 +15,6 @@ class HacksController < ApplicationController
     end
   end
 
-  def index 
-    redirect_to root_path
-  end
 
 
 private 

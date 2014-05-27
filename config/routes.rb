@@ -1,7 +1,7 @@
 Hackday::Application.routes.draw do
   
-  resources :days do
-    resources :hacks 
+  resources :days, :only => [:show, :new, :update, :index, :create] do
+    resources :hacks, :only => [:new, :create]
   end 
 
   root "days#index"

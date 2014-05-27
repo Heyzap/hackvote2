@@ -35,23 +35,22 @@ class DaysController < ApplicationController
       flash[:success] = "Welcome to Hackday #{@day.title}! Get hacking!"
       redirect_to @day
     else 
-      puts "heeeeereeee"
       render 'new'
     end
   end
 
-private 
-
+protected 
+    
+    NUMBER_OF_VOTES_ALLOWED = 3
     def votes_left(day)
       day_token = day.id.to_s.to_sym
-      cookies.permanent[day_token] ||= "3"
-      return cookies.permanent[day_token].to_i
+      session[day_token]||= 3
+      return session[day_token]
     end 
 
     def dec_votes(day) 
       day_token = day.id.to_s.to_sym
-      votes = cookies.permanent[day_token].to_i
-      cookies.permanent[day_token] = (votes - 1).to_s
+      session[day_token] -= 1
     end 
 
     def day_params

@@ -5,5 +5,7 @@ class CreateDays < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :days, :title, unique: true 
   end
 end
