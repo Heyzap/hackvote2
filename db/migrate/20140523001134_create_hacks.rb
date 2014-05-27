@@ -4,7 +4,7 @@ class CreateHacks < ActiveRecord::Migration
       t.string :creator
       t.string :title
       t.integer :day_id
-      t.integer :votes
+      t.integer :votes, :default => 0, :null => false
 
       t.timestamps
     end

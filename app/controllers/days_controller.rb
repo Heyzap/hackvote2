@@ -14,14 +14,14 @@ class DaysController < ApplicationController
   end
 
   def update 
-  @day = Day.find_by_id(params[:day_id])
+  @day = Day.find_by_id(params[:id])
   if params[:hackdayRadio] 
-    @hack = Hack.find_by_title(params[:hackdayRadio])
+    @hack = Hack.find_by_id(params[:hackdayRadio])
     if votes_left(@day) > 0 
       dec_votes(@day)
       flash[:success] = "Thank you for voting for #{@hack.title}!"
       @hack.votes += 1
-      @hack.save 
+      @hack.save!
     else
       flash[:error] = "You have no votes left for #{@day.title}!"
     end
@@ -35,21 +35,23 @@ class DaysController < ApplicationController
       flash[:success] = "Welcome to Hackday #{@day.title}! Get hacking!"
       redirect_to @day
     else 
+      puts "heeeeereeee"
       render 'new'
     end
   end
 
 private 
+
     def votes_left(day)
-      unless cookies.permanent[day.title.to_sym]
-        cookies.permanent[day.title.to_sym] = "3"
-      end
-      return cookies.permanent[day.title.to_sym].to_i
+      day_token = day.id.to_s.to_sym
+      cookies.permanent[day_token] ||= "3"
+      return cookies.permanent[day_token].to_i
     end 
 
     def dec_votes(day) 
-      votes = cookies.permanent[day.title.to_sym].to_i
-      cookies.permanent[day.title.to_sym] = (votes - 1).to_s
+      day_token = day.id.to_s.to_sym
+      votes = cookies.permanent[day_token].to_i
+      cookies.permanent[day_token] = (votes - 1).to_s
     end 
 
     def day_params

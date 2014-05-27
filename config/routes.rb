@@ -1,10 +1,8 @@
 Hackday::Application.routes.draw do
   
   resources :days do
-    match '/update',  to: 'days#update',            via: 'post'
     resources :hacks 
   end 
-    # , only: [:index, :new, :create]
 
   root "days#index"
   match '/new',  to: 'days#new',            via: 'get'

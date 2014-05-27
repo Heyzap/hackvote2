@@ -1,6 +1,6 @@
 <% provide(:title, @day.title) %>
 <h1><%= @day.title %></h1>
-<%= form_tag("/days/#{@day.id}/update", :method => "post") do %>
+<%= form_tag(@day, method: "put") do %>
   <%if @day.hacks.all.empty?%>
     <h2>Get Hacking!</h2>
   <%else %>

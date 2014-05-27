@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523230105) do
+ActiveRecord::Schema.define(version: 20140523001309) do
 
   create_table "days", force: true do |t|
     t.string   "title"
@@ -23,14 +23,7 @@ ActiveRecord::Schema.define(version: 20140523230105) do
     t.string   "creator"
     t.string   "title"
     t.integer  "day_id"
-    t.integer  "votes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sessions", force: true do |t|
-    t.string   "token"
-    t.text     "votes"
+    t.integer  "votes",      default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

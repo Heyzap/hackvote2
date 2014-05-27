@@ -6,25 +6,31 @@ class HacksController < ApplicationController
 
   def create
     @day = Day.find params[:day_id]
-    @hack = Hack.init(Hack.new(hack_params))
-    @hack.assign_attributes({:day_id => params[:day_id]})
+    @hack = Hack.create(hack_params)
+    puts "here da hack"
+    puts @hack.title
+    puts @hack.creator
+    puts @hack.id
+    puts @hack.day.id
     if @hack.save
-      flash[:success] = "#{@hack.creator} made #{@hack.title}?!?! What a Haxxxor!"
-      redirect_to (Day.find @hack.day_id)
+      flash[:success] = "#{@hack.creator} made #{@hack.title}?!?! What a Hax0r!"
+      redirect_to @day
     else
       render 'new'
     end
   end
 
   def index 
-    redirect_to @day
+    redirect_to root_path
   end
 
 
 private 
 
     def hack_params
-      params.require(:hack).permit(:creator, :title, :id, :day_id)
+      hackparams = params.require(:hack).permit(:creator, :title, :id, :day_id)
+      hackparams[:day_id] = params[:day_id]
+      return hackparams
     end
 
 end
